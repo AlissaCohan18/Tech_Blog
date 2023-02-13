@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Blog } = require("../../models");
+const withAuth = require('../../utils/auth');
 
 // get all blogs (include the post title and the date created)
 router.get("/", (req, res) => {
@@ -41,13 +42,12 @@ router.get("/:id", (req, res) => {
 
 
 //create new blog
-router.post("/", (req, res) => {
+router.post("/", withAuth, (req, res) => {
   //expected {"blog_title": "Title Here", "blog_content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit"}
   Blog.create({
     blog_title: req.body.blog_title,
     blog_content: req.body.blog_content,
-    user_id: req.body.user_id
-    //TODO swap for user_id: req.session.user_id,
+    user_id: req.session.user_id,
   })
     .then((dbData) => res.json(dbData))
     .catch((err) => {
@@ -57,7 +57,7 @@ router.post("/", (req, res) => {
 });
 
 //update blog content
-router.put("/:id", (req, res) => {
+router.put("/:id", withAuth, (req, res) => {
   Blog.update(
     {
       blog_content: req.body.blog_content,
@@ -82,7 +82,7 @@ router.put("/:id", (req, res) => {
 });
 
 //delete blog
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     console.log('id', req.params.id);
     Blog.destroy({
       where: {
