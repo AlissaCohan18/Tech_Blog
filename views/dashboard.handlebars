@@ -1,1 +1,44 @@
-<a>welcome to the dashboard</a>
+<a>Welcome to your dashboard!</a>
+
+
+<section class="new_post">
+  <h2>Create New Post</h2>
+
+  <form class="new-post-form">
+    <div>
+      <label for="post-title">Title</label>
+      <input type="text" id="post-title" name="post-title" />
+    </div>
+    <div>
+      <label for="post-url">Link</label>
+      <input id="post-url" name="post-url" />
+    </div>
+    <button type="submit" class="btn">Create</button>
+  </form>
+</section>
+
+{{#if posts.length}}
+<section>
+  <h2>Your Posts</h2>
+  <ol>
+    {{#each blogs as |blog|}}
+    <li>
+     <article class="blog">
+  <div class="title">
+    <a target="_blank">{{title}}</a>
+  </div>
+  <div class="meta">
+{{!-- executes like passing args into a function: format_plural("point",vote_count) --}}
+     by {{user.username}} on {{format_date created_at}}
+    |
+      <a href="/blog/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+  </div>
+</article>
+      <a href="/dashboard/edit/{{blog.id}}" class="edit-link">Edit post</a>
+    </li>
+    {{/each}}
+  </ol>
+</section>
+{{/if}}
+
+<script src="/javascript/add-blog.js"></script>

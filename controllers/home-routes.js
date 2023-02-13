@@ -3,6 +3,10 @@ const sequelize = require("../config/connection");
 const { User, Blog, Comment } = require("../models");
 
 router.get("/", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("dashboard");
+    return;
+  }
   res.render("homepage");
 });
 
