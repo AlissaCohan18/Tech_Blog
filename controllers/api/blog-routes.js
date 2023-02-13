@@ -5,9 +5,9 @@ const { Blog } = require("../../models");
 router.get("/", (req, res) => {
   console.log("======================");
   Blog.findAll({
-    // attributes: ["id", "blog_title", "blog_content", "created_at"],
-    // //display posts by created_at timestamp in descending order
-    // order: [["created_at", "DESC"]],
+    attributes: ["blog_title", "created_at"],
+    //display posts by created_at timestamp in descending order
+     order: [["created_at", "DESC"]],
   })
     .then((dbData) => res.json(dbData))
     .catch((err) => {
@@ -16,9 +16,29 @@ router.get("/", (req, res) => {
     });
 });
 
-//TODO get blog by ID - post title, contents, post creator’s username, and date created for that post
+//get blog by blog_ID - post title, contents, post creator’s username, and date created for that post
+router.get("/:id", (req, res) => {
+    Blog.findOne({
+      where: {
+        id: req.params.id,
+      },
+   //TODO: display creator's username 
+    })
+      .then((dbData) => {
+        if (!dbData) {
+          res.status(404).json({ message: "No Blog found with this id" });
+          return;
+        }
+        res.json(dbData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
 
-//TODO get blog by userid
+//TODO get blog by userid (to display list of user's Blogs)
+
 
 //create new blog
 router.post("/", (req, res) => {
@@ -26,7 +46,8 @@ router.post("/", (req, res) => {
   Blog.create({
     blog_title: req.body.blog_title,
     blog_content: req.body.blog_content,
-    //TODO user_id: req.session.user_id,
+    user_id: req.body.user_id
+    //TODO swap for user_id: req.session.user_id,
   })
     .then((dbData) => res.json(dbData))
     .catch((err) => {
@@ -35,8 +56,50 @@ router.post("/", (req, res) => {
     });
 });
 
-//TODO update blog
+//update blog content
+router.put("/:id", (req, res) => {
+  Blog.update(
+    {
+      blog_content: req.body.blog_content,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+    .then((dbData) => {
+      if (!dbData) {
+        res.status(404).json({ message: "No Blog found with this id" });
+        return;
+      }
+      res.json(dbPostData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
-//TODO delete blog
+//delete blog
+router.delete('/:id', (req, res) => {
+    console.log('id', req.params.id);
+    Blog.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(dbData => {
+        if (!dbData) {
+          res.status(404).json({ message: 'No Blog found with this id' });
+          return;
+        }
+        res.json(dbData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
 
 module.exports = router;
