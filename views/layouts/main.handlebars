@@ -16,7 +16,7 @@
         </h1>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
           <div class="container-fluid">
-            <a class="navbar-brand" href="/">Home</a>
+            <a href="/all_blogs" class="navbar-brand" href="/">Blogs</a>
             <button
               class="navbar-toggler"
               type="button"
@@ -28,7 +28,10 @@
             >
               <span class="navbar-toggler-icon"></span>
             </button>
-          
+            <button>
+              <a href="/" class="navbar-brand" href="/">Home</a>
+            </button>
+          {{#if loggedIn}}
             <div class="collapse navbar-collapse" id="navbarColor01">
               <ul class="navbar-nav me-auto">
                 <li class="nav-item">
@@ -44,7 +47,7 @@
                 id="log-out"
                 type="submit"
               >Log Out</button>
-             
+            {{/if}} 
             </div>
           </div>
         </nav>
@@ -62,5 +65,7 @@
 
 </html>
 
-
+ {{#if loggedIn}}
 <script src="/javascript/logout.js"></script>
+  {{/if}}
+

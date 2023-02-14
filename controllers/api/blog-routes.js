@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Blog } = require("../../models");
+const { Blog, User, Comment } = require("../../models");
 const withAuth = require('../../utils/auth');
 
 // get all blogs (include the post title and the date created)
@@ -9,6 +9,20 @@ router.get("/", (req, res) => {
     attributes: ["blog_title", "created_at"],
     //display posts by created_at timestamp in descending order
      order: [["created_at", "DESC"]],
+    //  include: [
+    //   {
+    //     model: Comment,
+    //     attributes: ["id", "comment_text", "blog_id", "user_id", "created_at"],
+    //     include: {
+    //       model: User,
+    //       attributes: ["username"],
+    //     },
+    //   },
+    //   {
+    //     model: User,
+    //     attributes: ["username"],
+    //   },
+    // ],
   })
     .then((dbData) => res.json(dbData))
     .catch((err) => {
@@ -23,7 +37,26 @@ router.get("/:id", (req, res) => {
       where: {
         id: req.params.id,
       },
-   //TODO: display creator's username 
+      attributes: [
+        "id",
+        "blog_title",
+        "blog_content",
+        "created_at",
+      ],
+      include: [
+        {
+          model: Comment,
+          attributes: ["id", "comment_text", "blog_id", "user_id", "created_at"],
+          include: {
+            model: User,
+            attributes: ["username"],
+          },
+        },
+        {
+          model: User,
+          attributes: ["username"],
+        },
+      ],
     })
       .then((dbData) => {
         if (!dbData) {
