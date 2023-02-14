@@ -22,9 +22,59 @@ router.get('/dashboard', (req, res) => {
   });
 });
 
+// router.get("/all_blogs", (req, res) => {
+//   res.render("all_blogs");
+// });
+
+//Blog Page (show all blogs)
 router.get("/all_blogs", (req, res) => {
-  res.render("all_blogs");
+  console.log("======================");
+  Blog.findAll({
+    // attributes: [
+    //   "id",
+    //   "blog_title",
+    //   "blog_content",
+    //   "created_at",
+    // ],
+    include: [
+      {
+        model: Comment,
+        attributes: ["id", "comment_text", "blog_id", "user_id", "created_at"],
+        include: {
+          model: User,
+          attributes: ["username"],
+        },
+      },
+      {
+        model: User,
+        attributes: ["username"],
+      },
+    ],
+  })
+    .then((dbData) => {
+      //loop over & map each Sequelize obj into a serialized version of itself & saving results in a new posts array
+      const blogs = dbData.map((blog) => blog.get({ plain: true }));
+
+      //use .render vs .sendFile() for using template engine->specify which template to use
+      //the .handlebars extension is implied
+      res.render('all_blogs', {
+        blogs,
+        loggedIn: req.session.loggedIn
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
+router.get("/login", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+
+  res.render("login");
+});
 
 module.exports = router;

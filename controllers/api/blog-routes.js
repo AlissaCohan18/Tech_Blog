@@ -6,23 +6,23 @@ const withAuth = require('../../utils/auth');
 router.get("/", (req, res) => {
   console.log("======================");
   Blog.findAll({
-    attributes: ["blog_title", "created_at"],
+   attributes: ["id", "blog_title", "blog_content", "created_at"],
     //display posts by created_at timestamp in descending order
      order: [["created_at", "DESC"]],
-    //  include: [
-    //   {
-    //     model: Comment,
-    //     attributes: ["id", "comment_text", "blog_id", "user_id", "created_at"],
-    //     include: {
-    //       model: User,
-    //       attributes: ["username"],
-    //     },
-    //   },
-    //   {
-    //     model: User,
-    //     attributes: ["username"],
-    //   },
-    // ],
+     include: [
+      {
+        model: Comment,
+        attributes: ["id", "comment_text", "blog_id", "user_id", "created_at"],
+        include: {
+          model: User,
+          attributes: ["username"],
+        },
+      },
+      {
+        model: User,
+        attributes: ["username"],
+      },
+    ],
   })
     .then((dbData) => res.json(dbData))
     .catch((err) => {

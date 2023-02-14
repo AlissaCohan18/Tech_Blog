@@ -31,14 +31,14 @@ app.set('view engine', 'handlebars');
 
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(require('./controllers'));
 
 // turn on connection to db and server
 // 'force: true' & npm start to reset db (drop & recreate tables). return to false
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
     app.listen(PORT, () => console.log('Now listening'));
   });
   
