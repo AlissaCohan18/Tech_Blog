@@ -8,11 +8,10 @@
         <div class="meta">
           {{! executes like passing args into a function: format_plural("comment", comments.length) }}
 
-          {{!-- on {{format_date created_at}} --}}
           <div  class="blogTitle">
           <a > {{blog.blog_title}}</a>
           </div>
-          <a> by {{user.username}} </a>
+          <a> by {{user.username}} on {{format_date created_at}} </a>
           <a>{{comments.length}} {{format_plural "comment" comments.length}}</a>
         </div>
       </article>

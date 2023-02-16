@@ -30,12 +30,12 @@ router.get('/dashboard', (req, res) => {
 router.get("/all_blogs", (req, res) => {
   console.log("======================");
   Blog.findAll({
-    // attributes: [
-    //   "id",
-    //   "blog_title",
-    //   "blog_content",
-    //   "created_at",
-    // ],
+    attributes: [
+      "id",
+      "blog_title",
+      "blog_content",
+      "created_at",
+    ],
     include: [
       {
         model: Comment,
