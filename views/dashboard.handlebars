@@ -2,7 +2,7 @@
 
   <a>Welcome to your dashboard!</a>
 
-{{!-- Create New Blogs --}}
+  {{! Create New Blogs }}
   <section class="new_blog">
     <h2>Create New Blog</h2>
 
@@ -19,24 +19,30 @@
     </form>
   </section>
 
-  
-{{!-- View this user's Blogs --}}
-
-<ol class="blog-list">
-  {{#each blogs as |blog|}}
-  <li>
-    <article class="blog">
-  <div class="title">
-    <a href="{{blog_title}}" target="_blank">{{title}}</a>
-  </div>
-  <div class="meta">
-       <a >{{blog.blog_title}} </a>
-       <a >{{comments.length}} {{format_plural "comment" comments.length}}</a>
-  </div>
-</article>
-  </li>
-  {{/each}}
-</ol>
+  {{! View this user's Blogs }}
+  {{#if blogs.length}}
+  <section>
+    <h2>Your Blogs</h2>
+    <ol>
+      {{#each blogs as |blog|}}
+        <li>
+          <article class="blog">
+            <div class="title">
+              <a href="{{blog_title}}" target="_blank">{{title}}</a>
+            </div>
+            <div class="meta">
+              <a>
+                <STRONG>{{blog.blog_title}}</STRONG>, from
+                {{format_date created_at}}</a>
+              <a>{{comments.length}}
+                {{format_plural "comment" comments.length}}</a>
+            </div>
+          </article>
+        </li>
+      {{/each}}
+    </ol>
+  </section>
+  {{/if}}
 
 {{/if}}
-  <script src="/javascript/add-blog.js"></script>
+<script src="/javascript/add-blog.js"></script>

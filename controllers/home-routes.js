@@ -15,20 +15,17 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.get('/dashboard', (req, res) => {
-  console.log(req.session);
-  res.render('dashboard', {
-    loggedIn: req.session.loggedIn
-  });
-});
-
-// router.get("/all_blogs", (req, res) => {
-//   res.render("all_blogs");
+// router.get('/dashboard', (req, res) => {
+//   console.log(req.session);
+//   res.render('dashboard', {
+//     loggedIn: req.session.loggedIn
+//   });
 // });
+
 
 //Blog Page (show all blogs)
 router.get("/all_blogs", (req, res) => {
-  console.log("======================");
+  console.log("hello blogs");
   Blog.findAll({
     attributes: [
       "id",
@@ -54,7 +51,6 @@ router.get("/all_blogs", (req, res) => {
     .then((dbData) => {
       //loop over & map each Sequelize obj into a serialized version of itself & saving results in a new posts array
       const blogs = dbData.map((blog) => blog.get({ plain: true }));
-
       //use .render vs .sendFile() for using template engine->specify which template to use
       //the .handlebars extension is implied
       res.render('all_blogs', {
@@ -73,8 +69,9 @@ router.get("/login", (req, res) => {
     res.redirect("/");
     return;
   }
-
   res.render("login");
 });
+
+
 
 module.exports = router;

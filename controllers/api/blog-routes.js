@@ -31,6 +31,7 @@ router.get("/", (req, res) => {
     });
 });
 
+//Get Blog by BLOG ID
 //get blog by blog_ID - post title, contents, post creator’s username, and date created for that post
 router.get("/:id", (req, res) => {
     Blog.findOne({
@@ -70,9 +71,6 @@ router.get("/:id", (req, res) => {
         res.status(500).json(err);
       });
   });
-
-//TODO get blog by userid (to display list of user's Blogs)
-
 
 //create new blog
 router.post("/", withAuth, (req, res) => {
