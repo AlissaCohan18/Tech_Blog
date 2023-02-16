@@ -3,6 +3,7 @@ const sequelize = require("../config/connection");
 const { Blog, User, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
+//Provides route to Dashboard when logged in & displays the logged in user's blogs
 router.get('/', withAuth, (req, res) => {
   Blog.findAll({
       where: {
@@ -40,6 +41,7 @@ router.get('/', withAuth, (req, res) => {
       });
   });
 
+//Loads page for editing Blog by ID
 router.get("/edit/:id", withAuth, (req, res) => {
   Blog.findByPk(req.params.id, {
     attributes: ["id", "blog_title", "blog_content", "created_at"],
@@ -61,8 +63,7 @@ router.get("/edit/:id", withAuth, (req, res) => {
     .then((dbData) => {
       if (dbData) {
         const blog = dbData.get({ plain: true });
-
-        res.render("edit-blog", {
+        res.render("edit_blog", {
           blog,
           loggedIn: true,
         });
@@ -74,5 +75,50 @@ router.get("/edit/:id", withAuth, (req, res) => {
       res.status(500).json(err);
     });
 });
+
+//Update Blog Content
+router.put("/edit/:id", withAuth, (req, res) => {
+  Blog.update(
+    {
+      blog_content: req.body.blog_content,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+    .then((dbData) => {
+      if (!dbData) {
+        res.status(404).json({ message: "No blog found with this id" });
+        return;
+      }
+      res.json(dbData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+router.delete('/edit/:id', withAuth, (req, res) => {
+  Blog.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(dbData => {
+      if (!dbData) {
+        res.status(404).json({ message: 'No Blog found with this id' });
+        return;
+      }
+      res.json(dbData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 
 module.exports = router;

@@ -104,7 +104,7 @@ router.put("/:id", withAuth, (req, res) => {
         res.status(404).json({ message: "No Blog found with this id" });
         return;
       }
-      res.json(dbPostData);
+      res.json(dbData);
     })
     .catch((err) => {
       console.log(err);

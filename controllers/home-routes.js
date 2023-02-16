@@ -15,14 +15,6 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-// router.get('/dashboard', (req, res) => {
-//   console.log(req.session);
-//   res.render('dashboard', {
-//     loggedIn: req.session.loggedIn
-//   });
-// });
-
-
 //Blog Page (show all blogs)
 router.get("/all_blogs", (req, res) => {
   console.log("hello blogs");

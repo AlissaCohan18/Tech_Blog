@@ -1,0 +1,55 @@
+<section class="uniformity">
+<article class="blog">
+  <div class="title">
+    <a href="{{blog_title}}" target="_blank">{{title}}</a>
+  </div>
+  <div class="meta">
+    <a>
+      <STRONG>{{blog.blog_title}}</STRONG>, added on
+      {{format_date created_at}}</a>
+    <a>{{comments.length}}
+      {{format_plural "comment" comments.length}}</a>
+  </div>
+</article>
+</section>
+
+{{#if loggedIn}}
+  {{! will only display content below if loggedIn is truthy 
+note: #if only works as a boolean, not as an if statement }}
+
+  <form class="comment-form">
+    <div>
+      <textarea name="comment-body"></textarea>
+    </div>
+
+    <div>
+      <button type="submit">add comment</button>
+    </div>
+  </form>
+{{/if}}
+
+<div class="comments">
+  {{#each this}}
+    <section class="comment">
+      <div class="meta">
+        {{! This works similarly to calling: format_date(created_at) }}
+        {{user.username}}
+        on
+        {{format_date created_at}}
+      </div>
+      <div class="text">
+        {{comment_text}}
+      </div>
+    </section>
+  {{/each}}
+</div>
+
+{{blog.comments}}
+
+{{#if loggedIn}}
+  {{! will only load these and their event listeners if we are logged in and will have view
+ and access to the form/buttons. This will also prevent dev tool errors for an event listener
+ on a button that doesn't exist/isn't loaded }}
+  <script src="/javascript/add-comment.js"></script>
+
+{{/if}}

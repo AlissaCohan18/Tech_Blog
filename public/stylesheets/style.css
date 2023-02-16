@@ -1,4 +1,4 @@
-p,a, .new_post, .new_blog {
+p, a, .uniformity {
     margin: 20px;
 }
 
@@ -6,11 +6,10 @@ h5 {
     margin-left: 20px;
 }
 
-#logInOut {
- margin-left: 20px;
- width: 25%;   
-}
-
 .blogTitle {
     color: blue;
+}
+
+.text_update {
+    width: 35%;
 }

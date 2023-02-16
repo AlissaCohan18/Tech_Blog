@@ -1,0 +1,38 @@
+<div class="uniformity">
+  <article>
+    <h2>
+      Edit Blog
+    </h2>
+    <form class="edit-blog-form">
+      <div>
+        <input
+          class="text_update"
+          name="blog-content"
+          type="text"
+          placeholder="new blog contents"
+          value="{{blog.blog_content}}"
+        />
+      </div>
+      <button type="submit" class="btn btn-outline-info btn-sm">Save blog</button>
+      <button
+        type="button"
+        class="delete-blog-btn btn btn-outline-info btn-sm"
+      >Delete blog</button>
+    </form>
+  </article>
+
+  <form class="comment-form">
+    <div>
+      <textarea class="text_update" name="comment-body"></textarea>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-outline-info btn-sm">add comment</button>
+    </div>
+  </form>
+</div>
+
+
+
+<script src="/javascript/edit-blog.js"></script>
+<script src="/javascript/delete-blog.js"></script>
+<script src="/javascript/add-comment.js"></script>
