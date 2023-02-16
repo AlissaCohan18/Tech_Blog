@@ -1,22 +1,21 @@
-<a>all blogs will go here</a>
-
 <ol class="blog-list">
   {{#each blogs as |blog|}}
-  <li>
-    {{!-- pull in html from blog-info.handlebars --}}
-    <article class="blog">
-  <div class="title">
-    <a href="{{blog_title}}" target="_blank">{{title}}</a>
-    {{!-- <span>({{format_url blog_url}})</span> --}}
-  </div>
-  <div class="meta">
-{{!-- executes like passing args into a function: format_plural("point",vote_count) --}}
-    {{!-- {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on {{format_date created_at}} --}}
-       <a >{{blog.blog_title}} </a>
-       <a >{{comments.length}} {{format_plural "comment" comments.length}}</a>
-  </div>
-</article>
-  </li>
+    <li>
+      <article class="blog">
+        <div class="title">
+          <a href="{{blog_title}}" target="_blank">{{title}}</a>
+        </div>
+        <div class="meta">
+          {{! executes like passing args into a function: format_plural("comment", comments.length) }}
+
+          {{!-- on {{format_date created_at}} --}}
+          <div  class="blogTitle">
+          <a > {{blog.blog_title}}</a>
+          </div>
+          <a> by {{user.username}} </a>
+          <a>{{comments.length}} {{format_plural "comment" comments.length}}</a>
+        </div>
+      </article>
+    </li>
   {{/each}}
 </ol>
-

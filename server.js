@@ -38,7 +38,7 @@ app.use(require('./controllers'));
 
 // turn on connection to db and server
 // 'force: true' & npm start to reset db (drop & recreate tables). return to false
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log('Now listening'));
   });
   

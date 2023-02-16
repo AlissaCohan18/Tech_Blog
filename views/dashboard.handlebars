@@ -2,6 +2,7 @@
 
   <a>Welcome to your dashboard!</a>
 
+{{!-- Create New Blogs --}}
   <section class="new_blog">
     <h2>Create New Blog</h2>
 
@@ -19,5 +20,23 @@
   </section>
 
   
+{{!-- View this user's Blogs --}}
+
+<ol class="blog-list">
+  {{#each blogs as |blog|}}
+  <li>
+    <article class="blog">
+  <div class="title">
+    <a href="{{blog_title}}" target="_blank">{{title}}</a>
+  </div>
+  <div class="meta">
+       <a >{{blog.blog_title}} </a>
+       <a >{{comments.length}} {{format_plural "comment" comments.length}}</a>
+  </div>
+</article>
+  </li>
+  {{/each}}
+</ol>
+
 {{/if}}
   <script src="/javascript/add-blog.js"></script>
