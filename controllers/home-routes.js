@@ -85,7 +85,7 @@ router.get("/all_blogs/:id", (req, res) => {
         console.log(blog);
         res.render("view_content", {
           blog,
-          loggedIn: true,
+          loggedIn: req.session.loggedIn,
         });
       } else {
         res.status(404).end();

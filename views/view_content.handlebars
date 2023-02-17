@@ -28,6 +28,7 @@
 </ol>
 </section>
 
+ {{#if loggedIn}}
 <form class="comment-form uniformity">
     <div>
       <textarea class="text_update" name="comment-body"></textarea>
@@ -36,6 +37,6 @@
       <button type="submit" class="btn btn-outline-info btn-sm">add comment</button>
     </div>
   </form>
-
+{{/if}}
 
 <script src="/javascript/view-details.js"></script>
