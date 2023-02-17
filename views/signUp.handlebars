@@ -1,40 +1,44 @@
-<h5>Sign Up!</h5>
-{{! sign-up form }}
-<form id="logInOut" class="signup-form">
-  <div class="form-group">
-    <label for="Email1" class="form-label mt-4">Email address</label>
-    <input
-      type="email"
-      class="form-control"
-      id="email-signUp"
-      aria-describedby="emailHelp"
-      placeholder="Enter email"
-    />
-    <label for="username" class="form-label mt-4">UserName</label>
-    <input
-      type="text"
-      class="form-control"
-      id="username-signUp"
-      placeholder="User Name"
-    />
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      id="newUserPswd"
-      placeholder="Password"
-    />
-    <small id="passwordlHelp" class="form-text text-muted">Must be at least 5
-      characters long.</small>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div>
+  <h5>Sign Up!</h5>
+  {{! sign-up form }}
+  <form id="logInOut" class="signup-form">
+    <div class="form-group">
+      <label for="Email1" class="form-label mt-4">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email-signUp"
+        aria-describedby="emailHelp"
+        placeholder="Enter email"
+      />
+      <label for="username" class="form-label mt-4">UserName</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username-signUp"
+        placeholder="User Name"
+      />
+    </div>
+    <div class="form-group">
+      <label
+        for="exampleInputPassword1"
+        class="form-label mt-4"
+      >Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="newUserPswd"
+        placeholder="Password"
+      />
+      <small id="passwordlHelp" class="form-text text-muted">Must be at least 5
+        characters long.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 
-<br />
-<a> Already have an Account? </a>
-<br />
-<a href="/">Click here to sign in!</a>
-
+  <br />
+  <a> Already have an Account? </a>
+  <br />
+  <a href="/">Click here to sign in!</a>
+</div>
 <script src="/javascript/sign-up.js"></script>
