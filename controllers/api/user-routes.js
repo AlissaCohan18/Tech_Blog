@@ -3,7 +3,7 @@ const { User } = require("../../models");
 
 //get all users (/api/users)
 router.get("/", (req, res) => {
-  // Access our User model & .findAll() to query all users from user table in db
+  // Access User model & .findAll() to query all users from user table in db
   User.findAll({
     attributes: { exclude: ["password"] },
   })
@@ -26,7 +26,6 @@ router.post("/", (req, res) => {
       req.session.user_id = dbData.id;
       req.session.username = dbData.username;
       req.session.loggedIn = true;
-
       res.json(dbData);
     });
   });
@@ -44,20 +43,16 @@ router.post("/login", (req, res) => {
       res.status(400).json({ message: "No user with that email address!" });
       return;
     }
-
     const validPassword = dbData.checkPassword(req.body.password);
-
     if (!validPassword) {
       res.status(400).json({ message: "Incorrect password!" });
       return;
     }
-
     req.session.save(() => {
       // declare session variables
       req.session.user_id = dbData.id;
       //req.session.username = dbData.username;
       req.session.loggedIn = true;
-
       res.json({ user: dbData, message: "You are now logged in!" });
     });
   });

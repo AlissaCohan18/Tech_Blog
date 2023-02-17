@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const sequelize = require("../config/connection");
 const { User, Blog, Comment } = require("../models");
 
 
+//direct to homepage or dashboard based on whether they're logged in
 router.get("/", (req, res) => {
   if (req.session.loggedIn) {
     res.redirect("dashboard");
@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
   res.render("homepage");
 });
 
+//direct to signup form
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
@@ -42,10 +43,8 @@ router.get("/all_blogs", (req, res) => {
     ],
   })
     .then((dbData) => {
-      //loop over & map each Sequelize obj into a serialized version of itself & saving results in a new posts array
+      //loop over & map each Sequelize obj into a serialized version of itself
       const blogs = dbData.map((blog) => blog.get({ plain: true }));
-      //use .render vs .sendFile() for using template engine->specify which template to use
-      //the .handlebars extension is implied
       res.render('all_blogs', {
         blogs,
         loggedIn: req.session.loggedIn

@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Blog, User, Comment } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-// get all blogs (include the post title and the date created)
+// get all blogs
 router.get("/", (req, res) => {
   console.log("======================");
   Blog.findAll({
@@ -32,7 +32,6 @@ router.get("/", (req, res) => {
 });
 
 //Get Blog by BLOG ID
-//get blog by blog_ID - post title, contents, post creator’s username, and date created for that post
 router.get("/:id", (req, res) => {
   Blog.findOne({
     where: {

@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const sequelize = require("../config/connection");
 const { Blog, User, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
@@ -101,6 +100,7 @@ router.put("/edit/:id", withAuth, (req, res) => {
     });
 });
 
+//Delete blog
 router.delete('/edit/:id', withAuth, (req, res) => {
   Blog.destroy({
     where: {
