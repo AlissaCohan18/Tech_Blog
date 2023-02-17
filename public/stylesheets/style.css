@@ -14,3 +14,7 @@ h5 {
 .text_update {
     width: 35%;
 }
+
+.smallText {
+   font-size: small; 
+}

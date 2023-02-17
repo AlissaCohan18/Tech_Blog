@@ -6,17 +6,20 @@
       </div>
       <div class="meta">
         <div class="blogTitle">
-          <a> <STRONG>{{blog.blog_title}}</STRONG></a>
+          <h4>{{blog.blog_title}}</h4>
   {{#with blog as |blog|}}
         </div>
         <a>{{blog.blog_content}}</a>
         <br>
         <a> Created by: {{user.username}} on {{format_date created_at}} </a>
         <br>  <br>
-        <a>{{format_plural "Comment" comments.length}}:</a>
+        <h5>{{format_plural "Comment" comments.length}}:</h5>
        <ul>
         {{#each  comments as |comment|}}
         <li>{{comment.comment_text}}</li>
+         <text class="smallText"> Posted by </text>
+          <em class="smallText"> {{user.username}} </em>
+          <text class="smallText"> on {{format_date created_at}} </text>
         {{/each}}
         </ul>
       </div>
