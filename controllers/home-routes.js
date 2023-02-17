@@ -15,13 +15,6 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-// router.get("/login", (req, res) => {
-//   if (req.session.loggedIn) {
-//     res.redirect("/");
-//     return;
-//   }
-//   res.render("login");
-// });
 
 //Main Blog Page (show all blogs)
 router.get("/all_blogs", (req, res) => {
