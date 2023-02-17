@@ -1,0 +1,38 @@
+<section class="uniformity">
+<ol class="blog-list">
+    <article class="blog">
+      <div class="title">
+        <a href="{{blog_title}}" target="_blank">{{title}}</a>
+      </div>
+      <div class="meta">
+        <div class="blogTitle">
+          <a> <STRONG>{{blog.blog_title}}</STRONG></a>
+  {{#with blog as |blog|}}
+        </div>
+        <a>{{blog.blog_content}}</a>
+        <br>
+        <a> Created by: {{user.username}} on {{format_date created_at}} </a>
+        <br>  <br>
+        <a>{{format_plural "Comment" comments.length}}:</a>
+       <ul>
+        {{#each  comments as |comment|}}
+        <li>{{comment.comment_text}}</li>
+        {{/each}}
+        </ul>
+      </div>
+  {{/with}}
+    </article>
+</ol>
+</section>
+
+<form class="comment-form uniformity">
+    <div>
+      <textarea class="text_update" name="comment-body"></textarea>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-outline-info btn-sm">add comment</button>
+    </div>
+  </form>
+
+
+<script src="/javascript/view-details.js"></script>

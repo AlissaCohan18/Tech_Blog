@@ -1,4 +1,4 @@
-<ol class="blog-list">
+<ol class="blog-list uniformity">
   {{#each blogs as |blog|}}
     <li>
       <article class="blog">
@@ -7,12 +7,11 @@
         </div>
         <div class="meta">
           {{! executes like passing args into a function: format_plural("comment", comments.length) }}
-
-          <div  class="blogTitle">
-          <a > {{blog.blog_title}}</a>
+          <div class="blogTitle">
+            <a href="/all_blogs/{{blog.id}}"> {{blog.blog_title}}</a>
+            added on
+            {{format_date created_at}}
           </div>
-          <a> by {{user.username}} on {{format_date created_at}} </a>
-          <a>{{comments.length}} {{format_plural "comment" comments.length}}</a>
         </div>
       </article>
     </li>

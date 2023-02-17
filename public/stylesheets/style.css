@@ -6,9 +6,10 @@ h5 {
     margin-left: 20px;
 }
 
-.blogTitle {
-    color: blue;
-}
+#logInOut {
+    margin-left: 20px; 
+    width: 20%; 
+   }
 
 .text_update {
     width: 35%;
