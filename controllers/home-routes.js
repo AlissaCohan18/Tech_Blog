@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const { User, Blog, Comment } = require("../models");
 
-
 //direct to homepage or dashboard based on whether they're logged in
 router.get("/", (req, res) => {
   if (req.session.loggedIn) {
@@ -16,17 +15,11 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-
 //Main Blog Page (show all blogs)
 router.get("/all_blogs", (req, res) => {
   console.log("hello blogs");
   Blog.findAll({
-    attributes: [
-      "id",
-      "blog_title",
-      "blog_content",
-      "created_at",
-    ],
+    attributes: ["id", "blog_title", "blog_content", "created_at"],
     include: [
       {
         model: Comment,
@@ -45,9 +38,9 @@ router.get("/all_blogs", (req, res) => {
     .then((dbData) => {
       //loop over & map each Sequelize obj into a serialized version of itself
       const blogs = dbData.map((blog) => blog.get({ plain: true }));
-      res.render('all_blogs', {
+      res.render("all_blogs", {
         blogs,
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn,
       });
     })
     .catch((err) => {
@@ -94,6 +87,5 @@ router.get("/all_blogs/:id", (req, res) => {
       res.status(500).json(err);
     });
 });
-
 
 module.exports = router;
