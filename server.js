@@ -9,15 +9,17 @@ const PORT = process.env.PORT || 3001;
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-//would store super secret secret in .env
+// Set up sessions with cookies
 const sess = {
-  secret: 'secret',
-  cookie: {},
+  secret: 'Super secret secret',
+  cookie: {
+    maxAge: 60 * 60 * 1000, // expires after 1 hour
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
-  })
+    db: sequelize,
+  }),
 };
 
 app.use(session(sess));
