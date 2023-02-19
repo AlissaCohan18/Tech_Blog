@@ -5,7 +5,7 @@ require('dotenv').config();
 
 //create connection to database, pass in MySQL info (username and password)
 
-//Locally:
+//Locally
   // const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
   //   host: 'localhost',
   //   dialect: 'mysql',
