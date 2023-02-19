@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
 
 //direct to signup form
 router.get("/signup", (req, res) => {
-  res.render("sign_in");
+  res.render("sign_up");
 });
 
 //Main Blog Page (show all blogs)
